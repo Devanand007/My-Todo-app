@@ -1,14 +1,17 @@
 FILEPATH = "todos.txt"
 
 
-def get_todos(filepath=FILEPATH):
-    """
-    Read a text file and return the list of
-    to-do items.
-    """
-    with open(filepath, 'r') as get_file:
-        get_todo = get_file.readlines()
-    return get_todo
+def get_todos(filepath='todos.txt'):
+    try:
+        with open(filepath, 'r') as get_file:
+            todos = get_file.readlines()
+        return todos
+    except FileNotFoundError:
+        print(f"File '{filepath}' not found. Creating a new file...")
+        # Create the file and return an empty list
+        with open(filepath, 'w') as new_file:
+            pass  # Creating an empty file
+        return []
 
 
 def write_todos(todos_arg, filepath=FILEPATH):
